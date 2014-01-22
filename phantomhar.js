@@ -6,22 +6,6 @@ var system = require('system');
 var webpage = require('webpage');
 
 
-function parseQueryString(qs) {
-    if (!qs) {
-        return {};
-    }
-    var chunks;
-    var result = [];
-    qs.split('&').forEach(function(val) {
-        chunks = val.split('=');
-        result.push({
-            name: chunks[0],
-            value: decodeURIComponent(chunks[1] || '')
-        });
-    });
-    return result;
-}
-
 function getType(ct, url) {
     ct = ct.toLowerCase();
     if (ct === 'text/html' || ct === 'text/plain') {
