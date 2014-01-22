@@ -1,0 +1,12 @@
+{
+    "name": "phantomhar",
+    "description": "a PhantomJS script to generate HTTP Archive (HAR) data from captured network traffic",
+    "version": "0.0.1",
+    "author": {
+        "name": "cvan"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/cvan/phantomHAR.git"
+    }
+}
