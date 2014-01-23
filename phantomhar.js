@@ -119,10 +119,14 @@ function createHAR(page) {
             cache: {},
             pageref: address,
             request: {
-                bodySize: -1,
+                // Accurate bodySize blocked on https://github.com/ariya/phantomjs/pull/11484
+                // bodySize: -1,
+                bodySize: startReply.bodySize,
                 cookies: [],
                 headers: request.headers,
-                headersSize: -1,
+                // Accurate headersSize blocked on https://github.com/ariya/phantomjs/pull/11484
+                // headersSize: -1,
+                headersSize: 0,
                 httpVersion: 'HTTP/1.1',
                 method: request.method,
                 queryString: [],
