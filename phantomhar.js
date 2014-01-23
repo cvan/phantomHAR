@@ -147,11 +147,6 @@ function createHAR(page) {
 function openPage(url) {
     var page = webpage.create();
 
-    page.customHeaders = {
-        'Accept-Encoding': 'gzip,deflate,sdch',
-        'Accept-Language': 'en-US,en;q=0.8,fr;q=0.6'
-    };
-
     page.address = url;
     page.resources = [];
     page.types = {};
