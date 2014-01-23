@@ -8,10 +8,11 @@ var webpage = require('webpage');
 
 function getType(ct, url) {
     ct = ct.toLowerCase();
-    if (ct === 'text/html' || ct === 'text/plain') {
+    if (ct.substr(0, 9) === 'text/html' ||
+        ct.substr(0, 10) === 'text/plain') {
         return 'doc';
     }
-    if (ct === 'text/css') {
+    if (ct.substr(0, 8) === 'text/css') {
         return 'css';
     }
     if (/javascript/.test(ct)) {
@@ -78,35 +79,36 @@ function createHAR(page) {
         }
 
         entries.push({
-            startedDateTime: request.time.toISOString(),
-            time: endReply.time - request.time,
+            cache: {},
+            pageref: address,
             request: {
-                method: request.method,
-                url: request.url,
-                httpVersion: 'HTTP/1.1',
+                bodySize: -1,
                 cookies: [],
                 headers: request.headers,
-                queryString: [],
                 headersSize: -1,
-                bodySize: -1
+                httpVersion: 'HTTP/1.1',
+                method: request.method,
+                queryString: [],
+                url: request.url,
             },
             response: {
-                status: endReply.status,
-                statusText: endReply.statusText,
-                httpVersion: 'HTTP/1.1',
+                bodySize: startReply.bodySize,
                 cookies: [],
                 headers: endReply.headers,
-                redirectURL: '',
                 headersSize: -1,
-                bodySize: startReply.bodySize,
+                httpVersion: 'HTTP/1.1',
+                redirectURL: '',
+                status: endReply.status,
+                statusText: endReply.statusText,
                 content: {
-                    size: startReply.bodySize,
+                    _type: type,
                     mimeType: endReply.contentType,
-                    text: startReply.content || '',
-                    type: type
+                    size: startReply.bodySize,
+                    text: startReply.content || ''
                 }
             },
-            cache: {},
+            startedDateTime: request.time.toISOString(),
+            time: endReply.time - request.time,
             timings: {
                 blocked: 0,
                 dns: -1,
@@ -115,19 +117,18 @@ function createHAR(page) {
                 wait: startReply.time - request.time,
                 receive: endReply.time - startReply.time,
                 ssl: -1
-            },
-            pageref: address
+            }
         });
     });
 
     return {
         log: {
-            version: '1.2',
             creator: {
                 name: 'PhantomJS (using phantomHAR)',
                 version: phantom.version.major + '.' + phantom.version.minor +
                          '.' + phantom.version.patch
             },
+            entries: entries,
             pages: [{
                 startedDateTime: startTime.toISOString(),
                 id: address,
@@ -136,7 +137,7 @@ function createHAR(page) {
                     onLoad: page.endTime - page.startTime
                 }
             }],
-            entries: entries
+            version: '1.2',
         }
     };
 }
