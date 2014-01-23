@@ -8,10 +8,6 @@ var webpage = require('webpage');
 
 function getType(ct, url) {
     ct = ct.toLowerCase();
-    if (ct.substr(0, 9) === 'text/html' ||
-        ct.substr(0, 10) === 'text/plain') {
-        return 'doc';
-    }
     if (ct.substr(0, 8) === 'text/css') {
         return 'css';
     }
@@ -33,7 +29,8 @@ function getType(ct, url) {
     if (ct.substr(0, 6) === 'video/') {
         return 'video';
     }
-    if (/(\/|-)font-/.test(ct) || /\/font/.test(ct) || /font\//.test(ct) ||
+    if (/(\/|-)font-/.test(ct) || /\/font/.test(ct) ||
+        ct.substr(0, 5) === 'font/' ||
         /\.((eot)|(otf)|(ttf)|(woff))($|\?)/i.test(url)) {
         return 'font';
     }
@@ -46,6 +43,11 @@ function getType(ct, url) {
     if (/\.((mp4)|(webm))($|\?)/i.test(url)) {
         return 'video';
     }
+    if (ct.substr(0, 9) === 'text/html' ||
+        ct.substr(0, 10) === 'text/plain') {
+        return 'doc';
+    }
+    return null;
 }
 
 function createHAR(page) {
