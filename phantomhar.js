@@ -6,6 +6,28 @@ var system = require('system');
 var webpage = require('webpage');
 
 
+function getErrorString(error) {
+    // According to http://qt-project.org/doc/qt-4.8/qnetworkreply.html
+    switch (error.errorCode) {
+        case 1:
+            return '(refused)';
+        case 2:
+            return '(closed)';
+        case 3:
+            return '(host not found)';
+        case 4:
+            return '(timeout)';
+        case 5:
+            return '(canceled)';
+        case 6:
+            return '(ssl failure)';
+        case 7:
+            return '(net failure)';
+        default:
+            return '(unknown error)';
+    }
+}
+
 function getType(ct, url) {
     ct = ct.toLowerCase();
     if (ct.substr(0, 8) === 'text/css') {
@@ -63,6 +85,7 @@ function createHAR(page) {
         var request = resource.request;
         var startReply = resource.startReply;
         var endReply = resource.endReply;
+        var error = resource.error;
 
         if (!request || !startReply || !endReply) {
             return;
@@ -78,6 +101,18 @@ function createHAR(page) {
         if (!type && endReply.contentType &&
             typeof endReply.contentType === 'string') {
             type = getType(endReply.contentType, request.url);
+        }
+
+        if (error) {
+            startReply.bodySize = 0;
+            startReply.time = 0;
+            endReply.time = 0;
+            endReply.content = {};
+            endReply.contentType = null;
+            endReply.headers = [];
+            endReply.statusText = getErrorString(error);
+            endReply.status = null;
+            type = null;
         }
 
         entries.push({
@@ -131,14 +166,16 @@ function createHAR(page) {
                          '.' + phantom.version.patch
             },
             entries: entries,
-            pages: [{
-                startedDateTime: startTime.toISOString(),
-                id: address,
-                title: title,
-                pageTimings: {
-                    onLoad: page.endTime - page.startTime
+            pages: [
+                {
+                    startedDateTime: startTime.toISOString(),
+                    id: address,
+                    title: title,
+                    pageTimings: {
+                        onLoad: page.endTime.getTime() - page.startTime.getTime()
+                    }
                 }
-            }],
+            ],
             version: '1.2',
         }
     };
