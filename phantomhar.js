@@ -185,7 +185,9 @@ function createHAR(page) {
     };
 }
 
-function openPage(url) {
+function openPage(url, delay) {
+    delay = delay || 15000;  // Default to 15 seconds
+
     var page = webpage.create();
 
     page.address = url;
@@ -221,8 +223,10 @@ function openPage(url) {
     page.open(page.address, function(status) {
         if (status !== 'success') {
             console.log('FAILed to load the address');
-            phantom.exit(1);
-        } else {
+            return phantom.exit(1);
+        }
+
+        window.setTimeout(function() {
             page.endTime = new Date();
 
             page.evaluate(function() {
@@ -258,13 +262,13 @@ function openPage(url) {
             var har = createHAR(page);
             console.log(JSON.stringify(har, null, 4));
             phantom.exit();
-        }
+        }, delay);
     });
 }
 
 if (system.args.length === 1) {
-    console.log('Usage:', system.args[0], '<URL>');
+    console.log('Usage:', system.args[0], '<URL> [<delay>]');
     phantom.exit(1);
 }
 
-openPage(system.args[1]);
+openPage(system.args[1], system.args[2]);
