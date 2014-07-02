@@ -1,5 +1,7 @@
 *.har
 *.sw*
 .DS_Store
+lib/packages/*/
 node_modules/
 npm-debug.log
+settings_local.js

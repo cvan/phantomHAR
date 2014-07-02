@@ -119,12 +119,12 @@ function createHAR(page) {
             cache: {},
             pageref: address,
             request: {
-                // Accurate bodySize blocked on https://github.com/ariya/phantomjs/pull/11484
+                // Accurate `bodySize` blocked on https://github.com/ariya/phantomjs/pull/11484
                 // bodySize: -1,
                 bodySize: startReply.bodySize,
                 cookies: [],
                 headers: request.headers,
-                // Accurate headersSize blocked on https://github.com/ariya/phantomjs/pull/11484
+                // Accurate `headersSize` blocked on https://github.com/ariya/phantomjs/pull/11484
                 // headersSize: -1,
                 headersSize: 0,
                 httpVersion: 'HTTP/1.1',
@@ -133,7 +133,9 @@ function createHAR(page) {
                 url: request.url,
             },
             response: {
-                bodySize: startReply.bodySize,
+                // Accurate `bodySize` (after gzip/deflate) blocked on https://github.com/ariya/phantomjs/issues/10156
+                // bodySize: -1,
+                bodySize: endReply.bodySize,
                 cookies: [],
                 headers: endReply.headers,
                 headersSize: -1,
@@ -144,8 +146,10 @@ function createHAR(page) {
                 content: {
                     _type: type,
                     mimeType: endReply.contentType,
-                    size: startReply.bodySize,
-                    text: startReply.content || ''
+                    size: endReply.bodySize,
+                    // Return `text` when we can decode `gzip`-d/`deflate`-d responses.
+                    // text: includeResponseText ? endReply.body || '' : null
+                    text: null
                 }
             },
             startedDateTime: request.time.toISOString(),
@@ -185,7 +189,7 @@ function createHAR(page) {
     };
 }
 
-function openPage(url, delay) {
+function openPage(url, delay, includeResponseText) {
     delay = delay || 15000;  // Default to 15 seconds
 
     var page = webpage.create();
@@ -218,11 +222,12 @@ function openPage(url, delay) {
     };
 
     // Clear browser cache/cookies/localStorage.
-    fs.removeTree(page.offlineStoragePath);
+    // TODO: Figure out a way to do this with SlimerJS. (This works fine in PhantomJS.)
+    //fs.removeTree(page.offlineStoragePath);
 
     page.open(page.address, function(status) {
         if (status !== 'success') {
-            console.log('FAILed to load the address');
+            console.log('Failed to load the address');
             return phantom.exit(1);
         }
 
@@ -260,15 +265,16 @@ function openPage(url, delay) {
             });
 
             var har = createHAR(page);
-            console.log(JSON.stringify(har, null, 4));
+            console.log(JSON.stringify(har, null, 2));
             phantom.exit();
         }, delay);
     });
 }
 
 if (system.args.length === 1) {
+    // console.log('Usage:', system.args[0], '<URL> [<delay>] [<includeResponseText>]');
     console.log('Usage:', system.args[0], '<URL> [<delay>]');
     phantom.exit(1);
 }
 
-openPage(system.args[1], system.args[2]);
+openPage(system.args[1], system.args[2], system.args[3]);

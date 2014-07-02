@@ -7,7 +7,30 @@ data from captured network traffic.
 
 # Dependencies
 
+To use PhantomJS:
+
 * <code>[brew](http://brew.sh/) install [phantomjs](http://phantomjs.org/)</code>
+
+To use SlimerJS:
+
+* <code>./install-packages.sh</code>
+
+
+# Installation
+
+Initialise settings:
+
+    cp settings_local.js.dist settings_local.js.dist
+
+# Development
+
+Run the development server:
+
+    node app.js
+
+To have the server restart upon changes, use [nodemon](https://github.com/remy/nodemon):
+
+    nodemon app.js
 
 
 # Usage
