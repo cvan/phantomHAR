@@ -1,6 +1,7 @@
 var child_process = require('child_process');
 var spawn = child_process.spawn;
 
+var cors = require('cors');
 var express = require('express');
 var bodyParser = require('body-parser');
 var Promise = require('es6-promise').Promise;
@@ -22,21 +23,8 @@ var app = express();
 app.use(morgan(env === 'development' ? 'dev' : 'combined'));
 // To support URL-encoded (not JSON-encoded) bodies.
 app.use(bodyParser.urlencoded());
+app.use(cors());
 
-
-// CORS support.
-app.all('*', function (req, res, next) {
-  if (!req.get('Origin')) {
-    return next();
-  }
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'GET, DELETE, OPTIONS, PATCH, POST, PUT');
-  res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
-  if (req.method === 'OPTIONS') {
-    return res.send(200);
-  }
-  next();
-});
 
 function phantomHAR(opts) {
   return new Promise(function (resolve, reject) {
