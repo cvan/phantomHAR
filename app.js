@@ -3,8 +3,8 @@ var spawn = child_process.spawn;
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var app = express();
 var Promise = require('es6-promise').Promise;
+var morgan = require('morgan');
 
 
 try {
@@ -14,7 +14,14 @@ try {
 }
 
 
-app.use(bodyParser.urlencoded());  // To support URL-encoded (not JSON-encoded) bodies.
+var env = process.env.NODE_ENV || 'development';
+
+
+var app = express();
+// Logging.
+app.use(morgan(env === 'development' ? 'dev' : 'combined'));
+// To support URL-encoded (not JSON-encoded) bodies.
+app.use(bodyParser.urlencoded());
 
 
 // CORS support.
@@ -88,10 +95,6 @@ function har(req, res) {
   if (!Object.keys(req.body).length) {
     // Use querystring parameters for `GET`s instead.
     DATA = req.query;
-  }
-
-  if (settings.DEBUG) {
-    console.log('[' + new Date() + '] ' + req.method + ' ' + req.url + ' ' + JSON.stringify(DATA));
   }
 
   var url = encodeURIComponent(DATA.url);
