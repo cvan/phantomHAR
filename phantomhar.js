@@ -6,30 +6,13 @@ var program = require('commander');
 var Promise = require('es6-promise').Promise;
 var request = require('request');
 
+var errors = require('./lib/errors');
 var utils = require('./lib/utils');
 var pkg = require('./package');
 
 
 // The contents of these types of files should be included in the HAR.
 var ALLOWED_CONTENT_TYPES = ['css', 'js', 'json', 'doc'];
-
-
-var errors = {};
-function Exception() {
-}
-Exception.prototype.toString = function () {
-  return (this.name ? '[' + this.name + '] ' : '') + (this.message || '');
-};
-
-[
-  'ConnectionError'
-].forEach(function (key) {
-  errors[key] = function (message) {
-    this.name = key;
-    this.message = message;
-  };
-  errors[key].prototype = new Exception();
-});
 
 
 var phantomInstance;
