@@ -36,14 +36,31 @@ To have the server restart upon changes, use [nodemon](https://github.com/remy/n
 
 ## Usage
 
-### Output to `stdout`
+### Command-Line Interface
 
-    phantomjs phantomhar.js 'http://thephantomoftheopera.com'
+To run from the command line, run `node phantomhar.js`.
 
-### Output to clipboard (Mac OS X)
+      Usage: phantomhar [options]
 
-    phantomjs phantomhar.js 'http://thephantomoftheopera.com' | pbcopy
+      Options:
 
-### Output to a file
+        -h, --help           output usage information
+        -V, --version        output the version number
+        -u, --url <url>      specify the url for which to generate a HAR
+        -d, --delay [delay]  wait X seconds before generating the HAR [$PHANTOMHAR_DELAY || 1000]
+        -b, --bodies         include response bodies in the HAR [$PHANTOMHAR_BODIES || false]
+        -H, --host [host]    specify the server host [$PHANTOMHAR_HOST || 0.0.0.0]
+        -p, --port [port]    specify the server port [$PHANTOMHAR_PORT || 4000]
 
-    phantomjs phantomhar.js 'http://thephantomoftheopera.com' > 'tpoto.com-'$(date +%Y.%m.%d-%H.%M.%S)'.har'
+
+#### Output to `stdout`
+
+    node phantomhar.js 'http://thephantomoftheopera.com'
+
+#### Output to clipboard (Mac OS X)
+
+    node phantomhar.js 'http://thephantomoftheopera.com' | pbcopy
+
+#### Output to a file
+
+    node phantomhar.js 'http://thephantomoftheopera.com' > 'tpoto.com-'$(date +%Y.%m.%d-%H.%M.%S)'.har'
