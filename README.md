@@ -1,11 +1,11 @@
-# phantomHAR
+![phantomHAR Logo](https://raw.github.com/cvan/phantomHAR/master/images/logo.png)
 
 A PhantomJS script to generate
 [HTTP Archive (HAR)](https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HAR/Overview.html)
 data from captured network traffic.
 
 
-# Dependencies
+## Dependencies
 
 To use PhantomJS:
 
@@ -16,13 +16,14 @@ To use SlimerJS:
 * <code>./install-packages.sh</code>
 
 
-# Installation
+## Installation
 
 Initialise settings:
 
     cp settings_local.js.dist settings_local.js.dist
 
-# Development
+
+## Development
 
 Run the development server:
 
@@ -33,16 +34,16 @@ To have the server restart upon changes, use [nodemon](https://github.com/remy/n
     nodemon app.js
 
 
-# Usage
+## Usage
 
-## Output to `stdout`
+### Output to `stdout`
 
     phantomjs phantomhar.js 'http://thephantomoftheopera.com'
 
-## Output to clipboard (Mac OS X)
+### Output to clipboard (Mac OS X)
 
     phantomjs phantomhar.js 'http://thephantomoftheopera.com' | pbcopy
 
-## Output to a file
+### Output to a file
 
     phantomjs phantomhar.js 'http://thephantomoftheopera.com' > 'tpoto.com-'$(date +%Y.%m.%d-%H.%M.%S)'.har'
