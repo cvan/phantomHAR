@@ -49,10 +49,10 @@ function openPage(opts) {
 function createPage(page, ph, opts) {
   return new Promise(function (resolve, reject) {
     page.address = opts.url;
-    // page.customHeaders({
-    //   'Cache-Control': 'no-cache',
-    //   'Pragma': 'no-cache'
-    // });
+    page.customHeaders = {
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache'
+    };
     page.resources = {};
     page.types = {};
 
