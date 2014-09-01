@@ -1,4 +1,4 @@
-![phantomHAR Logo](https://raw.github.com/cvan/phantomHAR/master/images/logo.png)
+![phantomHAR Logo](https://raw.githubusercontent.com/cvan/phantomHAR/master/images/logo.png)
 
 A PhantomJS script to generate
 [HTTP Archive (HAR)](https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HAR/Overview.html)
