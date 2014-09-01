@@ -9,11 +9,11 @@ data from captured network traffic.
 
 To use PhantomJS:
 
-* <code>[brew](http://brew.sh/) install [phantomjs](http://phantomjs.org/)</code>
+<code>[brew](http://brew.sh/) install [phantomjs](http://phantomjs.org/)</code>
 
 To use SlimerJS:
 
-* <code>./install-packages.sh</code>
+    ./install-packages.sh
 
 
 ## Installation
