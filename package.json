@@ -9,6 +9,12 @@
     "type": "git",
     "url": "git://github.com/cvan/phantomHAR.git"
   },
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-jshint": "^1.8.4",
+    "jshint-stylish": "^0.4.0",
+    "lab": "^4.2.0"
+  },
   "dependencies": {
     "body-parser": "^1.4.3",
     "es6-promise": "^1.0.0",
@@ -21,9 +27,30 @@
     "commander": "^2.3.0",
     "minimist": "^1.1.0"
   },
-  "devDependencies": {
-    "gulp": "^3.8.7",
-    "gulp-jshint": "^1.8.4",
-    "jshint-stylish": "^0.4.0"
-  }
+  "bin": {
+    "phantomhar": "cli.js"
+  },
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "scripts": {
+    "test": "make test",
+    "test-cov": "make test-cov",
+    "test-cov-html": "make test-cov-html"
+  },
+  "keywords": [
+    "phantomjs",
+    "phantom",
+    "casperjs",
+    "casper",
+    "har",
+    "performance",
+    "perf",
+    "website",
+    "web",
+    "page",
+    "url",
+    "json"
+  ]
 }

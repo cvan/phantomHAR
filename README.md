@@ -34,6 +34,17 @@ To have the server restart upon changes, use [nodemon](https://github.com/remy/n
     nodemon app.js
 
 
+## Tests
+
+Initialise settings:
+
+    cp settings_test.js{.dist,}
+
+To run tests:
+
+    npm test
+
+
 ## Usage
 
 ### Command-Line Interface
