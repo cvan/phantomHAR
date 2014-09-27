@@ -20,7 +20,7 @@ To use SlimerJS:
 
 Initialise settings:
 
-    cp settings_local.js.dist settings_local.js
+    cp settings_local.js{.dist,}
 
 
 ## Development
