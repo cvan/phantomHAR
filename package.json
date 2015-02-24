@@ -21,8 +21,7 @@
     "cors": "^2.4.1",
     "node-phantom-simple": "^1.2.0",
     "phantom": "^0.6.5",
-    "commander": "^2.3.0",
-    "minimist": "^1.1.0"
+    "commander": "^2.3.0"
   },
   "bin": {
     "phantomhar": "cli.js"
