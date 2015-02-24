@@ -9,6 +9,7 @@
     "type": "git",
     "url": "git://github.com/cvan/phantomHAR.git"
   },
+  "bugs": "http://github.com/cvan/phantomHAR/issues",
   "devDependencies": {
     "gulp": "^3.8.7",
     "gulp-jshint": "^1.8.4",
