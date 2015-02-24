@@ -1,6 +1,7 @@
 *.har
 *.sw*
 .DS_Store
+coverage.html
 lib/packages/*/
 node_modules/
 npm-debug.log

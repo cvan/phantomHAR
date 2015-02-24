@@ -35,9 +35,9 @@
     "cli.js"
   ],
   "scripts": {
-    "test": "make test",
-    "test-cov": "make test-cov",
-    "test-cov-html": "make test-cov-html"
+    "test": "lab",
+    "test-cov": "lab -c -L",
+    "test-cov-html": "lab -r html -o coverage.html"
   },
   "keywords": [
     "phantomjs",
