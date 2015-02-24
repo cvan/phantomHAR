@@ -34,6 +34,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "start": "node cli.js",
     "test": "lab",
     "test-cov": "lab -c -L",
     "test-cov-html": "lab -r html -o coverage.html"
