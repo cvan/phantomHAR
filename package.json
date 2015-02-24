@@ -24,8 +24,9 @@
     "phantom": "^0.6.5",
     "commander": "^2.3.0"
   },
+  "preferGlobal": true,
   "bin": {
-    "phantomhar": "cli.js"
+    "phantomhar": "./cli.js"
   },
   "files": [
     "index.js",
