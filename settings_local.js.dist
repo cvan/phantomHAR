@@ -1,5 +1,0 @@
-module.exports = {
-  DEBUG: true,
-  PORT: 9000,
-  CAPTURE_DELAY: 0
-};

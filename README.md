@@ -18,27 +18,12 @@ To use SlimerJS:
 
 ## Installation
 
-Initialise settings:
+To install the Node dependencies:
 
-    cp settings_local.js{.dist,}
-
-
-## Development
-
-Run the development server:
-
-    node app.js
-
-To have the server restart upon changes, use [nodemon](https://github.com/remy/nodemon):
-
-    nodemon app.js
+    npm install
 
 
 ## Tests
-
-Initialise settings:
-
-    cp settings_test.js{.dist,}
 
 To run tests:
 

@@ -16,11 +16,8 @@
     "lab": "^4.2.0"
   },
   "dependencies": {
-    "body-parser": "^1.4.3",
     "es6-promise": "^1.0.0",
-    "express": "^4.4.5",
     "request": "^2.36.0",
-    "morgan": "^1.2.3",
     "cors": "^2.4.1",
     "node-phantom-simple": "^1.2.0",
     "phantom": "^0.6.5",
