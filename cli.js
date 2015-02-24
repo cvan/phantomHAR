@@ -1,7 +1,7 @@
 var program = require('commander');
 
 var phantomhar = require('./lib/phantomhar.js');
-var pkg = require('../package');
+var pkg = require('./package');
 
 
 /**
