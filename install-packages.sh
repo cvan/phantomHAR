@@ -14,7 +14,7 @@ then
 else
     echo "Downloading 'slimerjs'"
 
-    SLIMER_VER=0.9.1
+    SLIMER_VER=0.9.5
 
     if [ $(uname) == "Darwin" ]
     then
