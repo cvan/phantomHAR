@@ -25,13 +25,10 @@
     "commander": "^2.3.0"
   },
   "preferGlobal": true,
+  "main": "index.js",
   "bin": {
     "phantomhar": "./cli.js"
   },
-  "files": [
-    "index.js",
-    "cli.js"
-  ],
   "license": "MIT",
   "scripts": {
     "start": "node cli.js",
