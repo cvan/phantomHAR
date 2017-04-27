@@ -1,7 +1,7 @@
 {
   "name": "phantomhar",
   "description": "a PhantomJS script to generate HTTP Archive (HAR) data from captured network traffic",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": {
     "name": "cvan"
   },
